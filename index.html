@@ -1,26 +1,421 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Website</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awards - Celebrate Excellence on the Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background glow effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b4c1ff 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #a0aec0;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Awards Grid Section */
+        .awards-section {
+            padding: 100px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #a0aec0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .award-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .award-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.5), transparent);
+        }
+
+        .award-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
+        }
+
+        .award-card:hover::after {
+            opacity: 1;
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .award-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .award-card .category {
+            font-size: 0.95rem;
+            color: #8b5cf6;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 15px;
+        }
+
+        .award-card p {
+            color: #a0aec0;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #a0aec0;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        footer p {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        footer a {
+            display: inline-block;
+            margin: 0 15px;
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+                padding: 60px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .awards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                padding: 40px 30px;
+            }
+
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Awards for the best of the web</h1>
+            <p>Celebrating excellence in design, innovation, and user experience. Submit your site and showcase what makes it extraordinary.</p>
+            <a href="#submit" class="cta-button">Submit Your Site</a>
+        </div>
+    </section>
 
-<!-- HEADER -->
-<div id="header"></div>
+    <!-- Awards Grid Section -->
+    <section class="awards-section">
+        <div class="section-header">
+            <h2>Featured Awards</h2>
+            <p>Recognize outstanding digital experiences across multiple categories</p>
+        </div>
+        <div class="awards-grid">
+            <div class="award-card">
+                <div class="award-icon">🎨</div>
+                <h3>Design Excellence</h3>
+                <div class="category">Visual Design</div>
+                <p>Outstanding UI/UX design that sets new standards for aesthetic innovation and user delight.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">⚡</div>
+                <h3>Performance</h3>
+                <div class="category">Technical</div>
+                <p>Lightning-fast load times and optimized performance delivering exceptional user experiences.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">🚀</div>
+                <h3>Innovation</h3>
+                <div class="category">Creativity</div>
+                <p>Groundbreaking features and ideas that push the boundaries of web technology forward.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">♿</div>
+                <h3>Accessibility</h3>
+                <div class="category">Inclusion</div>
+                <p>Inclusive design ensuring every user, regardless of ability, has equal access and experience.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">📱</div>
+                <h3>Responsive Design</h3>
+                <div class="category">Adaptability</div>
+                <p>Seamless experiences across all devices and screen sizes with intuitive responsive layouts.</p>
+            </div>
+            <div class="award-card">
+                <div class="award-icon">💡</div>
+                <h3>Best Overall</h3>
+                <div class="category">Excellence</div>
+                <p>Exceptional sites that excel across all dimensions and represent the peak of web craftsmanship.</p>
+            </div>
+        </div>
+    </section>
 
-<!-- MAIN CONTENT -->
-<section class="hero">
-  <h1>Welcome to My Website</h1>
-  <p>This is a fully structured website</p>
-</section>
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2>About These Awards</h2>
+            <p>We celebrate the most innovative and beautifully designed websites on the web. Our rigorous selection process honors those who push creative and technical boundaries.</p>
+            <p>Whether it's exceptional performance, groundbreaking design, or outstanding user experience, we recognize the work that defines the future of the web.</p>
+        </div>
+    </section>
 
-<div id="cards"></div>
-
-<!-- FOOTER -->
-<div id="footer"></div>
-
-<script src="js/main.js"></script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Web Awards. Celebrating digital excellence.</p>
+        <div>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#submit" id="submit">Submit</a>
+            <a href="#privacy">Privacy</a>
+        </div>
+    </footer>
 </body>
 </html>
