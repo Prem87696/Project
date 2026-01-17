@@ -1,20 +1,7 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-}
-
-.header {
-  background: #222;
-  color: #fff;
-  padding: 10px;
-}
-
-.header button {
-  margin: 5px;
-}
-
-.footer {
-  background: #eee;
-  padding: 10px;
-  text-align: center;
-}
+body { margin:0; font-family:Arial; background:#f4f4f4 }
+.site-header { background:#222; color:#fff; padding:15px }
+.site-header a { color:white; margin-right:15px; text-decoration:none }
+.hero { padding:50px; text-align:center }
+.card { background:white; padding:20px; margin:20px }
+.site-footer { background:#222; color:#fff; text-align:center; padding:10px }
+.logo { width:50px }
