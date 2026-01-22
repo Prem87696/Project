@@ -1,4 +1,0 @@
-@media(max-width:600px){
-  .hero { padding:20px }
-  .site-header { text-align:center }
-}
